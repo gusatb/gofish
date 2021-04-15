@@ -12,7 +12,7 @@ def get_int_input(message='>> '):
         return m
 
 def get_players_string():
-    return 'Choose Player:\n\t1: Human\n\t2: RandomBot\n\t3: BadBot\n\t4: GoodBot'
+    return 'Choose Player:\n\t1: Human\n\t2: RandomBot\n\t3: BadBot\n\t4: GoodBot\n\t5: GoodBotNoRand'
 
 def player_selection_to_bot(selection):
     if selection == 1:
@@ -23,7 +23,12 @@ def player_selection_to_bot(selection):
         return bots.BadBot()
     elif selection == 4:
         return bots.GoodBot()
+    elif selection == 5:
+        return bots.GoodBot(no_random=True)
     raise ValueError('Incorrect Selection')
+
+print('Which variant:\n\t1: Allow Draws\n\t2: No Draws')
+drawless = get_int_input() == 2
 
 global_players = []
 has_human = False
@@ -39,7 +44,7 @@ n_games = get_int_input('How many games?\n>> ')
 for i_game in range(n_games):
     # Global player indices in game indices list: player_map[1 == first_move] = 1==human_player
     player_controllers = [global_players[i_game % 2], global_players[(i_game+1)%2]]
-    game = gofish.GameState(player_controllers)
+    game = gofish.GameState(player_controllers, drawless=drawless)
 
     player_1_name = player_controllers[0].get_name()
     player_2_name = player_controllers[1].get_name()
@@ -56,6 +61,7 @@ for i_game in range(n_games):
     elif has_human:
         print('Draw!')
 
+print(f'Drawless variant: {drawless}')
 print(f'Total Wins:')
 print(f'\t{player_controllers[0].get_name()}: {player_controllers[0].wins/n_games}, {player_controllers[0].wins}')
 print(f'\t{player_controllers[1].get_name()}: {player_controllers[1].wins/n_games}, {player_controllers[1].wins}')

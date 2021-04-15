@@ -89,7 +89,7 @@ class PlayerState:
         return None
 
 class GameState:
-    def __init__(self, player_controllers, drawless=True):
+    def __init__(self, player_controllers, drawless):
         assert len(player_controllers) == 2
         self.deck = [n%13 for n in range(52)]
         random.shuffle(self.deck)

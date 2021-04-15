@@ -35,9 +35,10 @@ class BadBot(game.PlayerController):
 class GoodBot(game.PlayerController):
     """Keeps track of opponents cards, asks for a random from highest count.
     """
-    def __init__(self):
+    def __init__(self, no_random=False):
         super().__init__()
         self.opponent_cards = set()
+        self.no_random = no_random
 
     def opponent_asks(self, card):
         self.opponent_cards.add(card)
@@ -55,8 +56,6 @@ class GoodBot(game.PlayerController):
             elif card in visible_state.opponent_sets:
                 self.opponent_cards.remove(card)
 
-        #print(f'DEBUG:\n\t{self.opponent_cards}\n\t{hand}')
-
         for card in hand.keys():
             if card in self.opponent_cards:
                 self.opponent_cards.remove(card)
@@ -64,7 +63,14 @@ class GoodBot(game.PlayerController):
 
         max_count = max(hand.values())
         highest_types = [k for k, v in hand.items() if v == max_count]
-        move = random.choice(highest_types)
-        if move in self.opponent_cards:
-            self.opponent_cards.remove(move)
+
+        if self.no_random:
+            highest_types.sort()
+            move = highest_types[0]
+            if move in self.opponent_cards:
+                self.opponent_cards.remove(move)
+        else:
+            move = random.choice(highest_types)
+            if move in self.opponent_cards:
+                self.opponent_cards.remove(move)
         return move
