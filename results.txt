@@ -1,0 +1,51 @@
+Drawless Variant
+Self Plays
+RandomBot
+	RandomBot: 0.49975, 49975
+	RandomBot: 0.50025, 50025
+BadBot
+	BadBot: 0.50231, 50231
+	BadBot: 0.49769, 49769
+
+GoodBot
+	GoodBot: 0.50031, 50031
+	GoodBot: 0.49969, 49969
+Against
+RandomBot vs BadBot
+	BadBot: 0.39385, 39385
+	RandomBot: 0.60615, 60615
+
+GoodBot vs RandomBot
+	RandomBot: 0.35794, 35794
+	GoodBot: 0.64206, 64206
+BadBot vs GoodBot
+	GoodBot: 0.66127, 66127
+	BadBot: 0.33873, 33873
+
+Drawable Variant
+Self Plays
+RandomBot
+	RandomBot: 0.42781, 42781
+	RandomBot: 0.42847, 42847
+	Draws: 0.14372, 14372
+BadBot
+	BadBot: 0.41354, 41354
+	BadBot: 0.41608, 41608
+	Draws: 0.17038, 17038
+GoodBot
+	GoodBot: 0.43689, 43689
+	GoodBot: 0.44121, 44121
+	Draws: 0.1219, 12190
+Against
+RandomBot vs BadBot
+	BadBot: 0.33616, 33616
+	RandomBot: 0.52497, 52497
+	Draws: 0.13887, 13887
+GoodBot vs RandomBot
+	GoodBot: 0.5665, 56650
+	RandomBot: 0.27942, 27942
+	Draws: 0.15408, 15408
+BadBot vs GoodBot
+	BadBot: 0.30494, 30494
+	GoodBot: 0.56641, 56641
+	Draws: 0.12865, 12865
