@@ -13,6 +13,7 @@ deck_size: Number of cards left in the deck.
 class PlayerController:
     def __init__(self):
         self.wins = 0
+        self.elo = 1000.0
 
     def new_game(self, player):
         """Informs new game is starting.
@@ -146,4 +147,6 @@ class GameState:
         else:
             if len(player.sets) + len(other_player.sets) == 13:
                 self.winner = 1 if len(self.players[0].sets) >= 7 else 2
+        return self.winner
+
 

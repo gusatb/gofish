@@ -35,16 +35,20 @@ class BadBot(game.PlayerController):
 class GoodBot(game.PlayerController):
     """Keeps track of opponents cards, asks for a random from highest count.
     """
-    def __init__(self, no_random=False):
+    def __init__(self, default_ask=''):
+        """Default ask one of: [random_high, same_high, random_all]"""
         super().__init__()
         self.opponent_cards = set()
-        self.no_random = no_random
+        self.default_ask = default_ask
+
+    def new_game(self, player):
+        self.opponent_cards = set()
 
     def opponent_asks(self, card):
         self.opponent_cards.add(card)
 
     def get_name(self):
-        return 'GoodBot'
+        return f'GoodBot_{self.default_ask}'
 
     def move(self, visible_state):
         hand = visible_state.hand
@@ -64,13 +68,19 @@ class GoodBot(game.PlayerController):
         max_count = max(hand.values())
         highest_types = [k for k, v in hand.items() if v == max_count]
 
-        if self.no_random:
+        if self.default_ask == 'same_high':
             highest_types.sort()
             move = highest_types[0]
             if move in self.opponent_cards:
                 self.opponent_cards.remove(move)
-        else:
+        elif self.default_ask == 'random_high':
             move = random.choice(highest_types)
             if move in self.opponent_cards:
                 self.opponent_cards.remove(move)
+        elif self.default_ask == 'random_all':
+            types = list(visible_state.hand.keys())
+            move = random.choice(types)
+        else:
+            raise ValueError('Default ask not set correctly.')
+
         return move
